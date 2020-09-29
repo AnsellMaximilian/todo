@@ -1,8 +1,9 @@
-function Todo(title, completed, important, daily){
+function Todo(title, important, daily){
     this.title = title;
-    this.completed = completed;
     this.important = important;
     this.daily = daily;
 }
+
+Todo.prototype.completed = false;
 
 export default Todo;
