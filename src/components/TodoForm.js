@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/todo-form.css';
+
 class TodoForm extends React.Component {
     constructor(props){
         super(props);
@@ -21,6 +23,9 @@ class TodoForm extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addTodo(this.state);
+        this.setState({
+            title: ""
+        })
     }
     render(){
         const {title, important, daily} = this.state;

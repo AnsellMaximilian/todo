@@ -1,0 +1,32 @@
+#app-header{
+    background-color: var(--main-color);
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    
+}
+
+#app-title {
+    margin: 0;
+    line-height: 50px;
+    margin-left: 25px;
+}
+
+
+#navbar-list {
+    list-style-type: none;
+    margin: 0;
+    margin-right: 25px;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 0;
+    font-weight: bold;
+}
+
+.navbar-button{
+    margin: auto 5px;
+}
+
