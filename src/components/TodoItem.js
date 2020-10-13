@@ -15,9 +15,11 @@ class TodoItem extends React.Component {
         return(
             
             <div className="todo-item">
-                <button onClick={this.handleToggleComplete}>{completed ? "Done" : "Nope"}</button>
+                <button onClick={this.handleToggleComplete}
+                    className={completed ? "fas fa-check-square" : "fas fa-square"}
+                ></button>
                 <span>{title}</span>
-                <button>{important ? "!" : "Chill"}</button>
+                <button className={important ? "fas fa-exclamation-circle" : "fas fa-circle"}></button>
                 <span>{daily ? "Daily" : "Whatever"}</span>
                 <button onClick={this.handleDelete}>Delete</button>
             </div>

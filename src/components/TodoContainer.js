@@ -5,7 +5,7 @@ import Todo from '../models/Todo';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 
-//Databse
+//Database
 import db from '../service/database';
 
 class TodoContainer extends React.Component {
@@ -35,7 +35,6 @@ class TodoContainer extends React.Component {
 
     addTodo = (todo) => {
         const todoItems = this.state.todoItems;
-
         //add todo to firebase
         db.collection('todos').add({
             title: todo.title,
