@@ -28,5 +28,69 @@
 
 .navbar-button{
     margin: auto 5px;
+    cursor: pointer;
 }
 
+.navbar-button:hover{
+    text-decoration: underline;
+}
+
+
+
+/* FORMS */
+#auth-form-container{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.568);
+    z-index: 14;
+}
+
+
+
+#auth-form {
+    color: black;
+    width: 600px;
+    height: 300px;
+    position: fixed;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 15px 15px 15px var(--highlight);
+    left: 50%;
+    top: 65px;
+    transform: translateX(-50%);
+    z-index: 15;
+    max-width: 90%;
+}
+
+#auth-form-title {
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px;
+}
+
+.auth-form-input {
+    display: block;
+    margin: 10px auto;
+    height: 25px;
+}
+
+#auth-form-button {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    background-color: var(--main-color);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 3px 3px 3px var(--highlight);
+}
+
+#auth-form-button:hover {
+    background-color:  #017ce0;
+}
+
+#auth-form-button:active {
+    transform: scale(0.85);
+}

@@ -40,7 +40,7 @@ class TodoForm extends React.Component {
 
                 <button id="important-form-btn" name="important" type="button" 
                     onClick={this.handleChange} 
-                    className={important ? "fas fa-exclamation" : ""}
+                    className={important ? "fas fa-exclamation" : "fas fa-times"}
                     title={important ? "Mark un-important" : "Mark important"}
                 ></button>
 

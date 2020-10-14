@@ -7,7 +7,7 @@ import TodoForm from './TodoForm';
 import TodoTools from './TodoTools';
 
 //Database
-import db from '../service/database';
+import {db} from '../service/firebase';
 
 // CSS
 import '../css/todo-container.css';
@@ -22,19 +22,7 @@ class TodoContainer extends React.Component {
 
     componentDidMount(){
         // get data
-        db.collection('todos').get() 
-        .then((result) => {
-            const todoItems = result.docs.map((doc) => {
-                const {title, important, daily, completed} = doc.data();
-                const newTodo = new Todo(doc.id, title, important, daily);
-                newTodo.completed = completed;
-                return newTodo;
-            });
-            this.setState({
-                todoItems: todoItems
-            })
-            
-        })
+        this.getAllTasks();
     }
 
     addTodo = (todo) => {
@@ -83,13 +71,61 @@ class TodoContainer extends React.Component {
             todoItems: todoItems,
         })
     }
+
+    // Tools methods
+    getAllTasks = () => {
+        db.collection('todos').orderBy('important', 'desc').get() 
+        .then((result) => {
+            const todoItems = result.docs.map((doc) => {
+                const {title, important, daily, completed} = doc.data();
+                const newTodo = new Todo(doc.id, title, important, daily);
+                newTodo.completed = completed;
+                return newTodo;
+            });
+            this.setState({
+                todoItems: todoItems
+            })
+        })
+    }
+
+    getDailyTasks = () => {
+        this.filterTasks('daily', true);
+    }
+
+    getImportantTasks = () => {
+        this.filterTasks('important', true);
+    }
+    
+    getCompletedTasks = () => {
+        this.filterTasks('completed', true);
+    }
+
+    // Set todos in state by value of attribute
+    filterTasks = (att, value) => {
+        db.collection('todos').where(att, "==", value).get()
+        .then(result => {
+            const todoItems = result.docs.map((doc) => {
+                const {title, important, daily, completed} = doc.data();
+                const newTodo = new Todo(doc.id, title, important, daily);
+                newTodo.completed = completed;
+                return newTodo;
+            });
+            this.setState({
+                todoItems: todoItems
+            })
+        })
+    }
     render(){
         
         return(
             <div id="todo-container">
                 <TodoForm addTodo={this.addTodo}/>
-                <TodoTools />
-                
+                <TodoTools 
+                    getDailyTasks={this.getDailyTasks}
+                    getAllTasks={this.getAllTasks}
+                    getImportantTasks={this.getImportantTasks}
+                    getCompletedTasks={this.getCompletedTasks}
+                />
                 <TodoList todoItems={this.state.todoItems}
                     deleteTodo={this.deleteTodo}
                     toggleCompleteTodo={this.toggleCompleteTodo}
