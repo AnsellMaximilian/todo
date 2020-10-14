@@ -4,9 +4,13 @@ import Todo from '../models/Todo';
 // Componenets
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
+import TodoTools from './TodoTools';
 
 //Database
 import db from '../service/database';
+
+// CSS
+import '../css/todo-container.css';
 
 class TodoContainer extends React.Component {
     constructor(props){
@@ -73,8 +77,8 @@ class TodoContainer extends React.Component {
             return todo;
         })
         db.collection('todos').doc(id).update({completed: completed})
-        .then(function(){console.log("NIGGER", id)})
-        .catch(function(){console.log("FAGG")});
+        .then(function(){console.log(`Document with id ${id} updated`)})
+        .catch(function(){console.log("Oops, something went wrong!")});
         this.setState({
             todoItems: todoItems,
         })
@@ -82,10 +86,10 @@ class TodoContainer extends React.Component {
     render(){
         
         return(
-            <div>
-                <TodoForm 
-                    addTodo={this.addTodo}
-                />
+            <div id="todo-container">
+                <TodoForm addTodo={this.addTodo}/>
+                <TodoTools />
+                
                 <TodoList todoItems={this.state.todoItems}
                     deleteTodo={this.deleteTodo}
                     toggleCompleteTodo={this.toggleCompleteTodo}

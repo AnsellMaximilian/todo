@@ -24,7 +24,9 @@ class TodoForm extends React.Component {
         e.preventDefault();
         this.props.addTodo(this.state);
         this.setState({
-            title: ""
+            title: "",
+            important: false,
+            daily: false,
         })
     }
     render(){
@@ -32,18 +34,17 @@ class TodoForm extends React.Component {
         return(
             <div id="todo-form">
                 <label htmlFor="title" id="title-input-container">
-                    <span>TASK:</span> 
-                    <input id="title" name="title" type="text" placeholder="Let the dogs out, etc." value={title} onChange={this.handleChange}/>
+                    <input id="title" name="title" type="text" placeholder="Enter Todo Title" value={title} onChange={this.handleChange}/>
                 </label>
                 
 
-                <button id="important" name="important" type="button" 
+                <button id="important-form-btn" name="important" type="button" 
                     onClick={this.handleChange} 
-                    className={important ? "fas fa-exclamation-circle" : "fas fa-circle"}
+                    className={important ? "fas fa-exclamation" : ""}
                     title={important ? "Mark un-important" : "Mark important"}
                 ></button>
 
-                <button id="daily" name="daily" type="button" 
+                <button id="daily-form-btn" name="daily" type="button" 
                     onClick={this.handleChange}
                     className={daily ? "fas fa-calendar-alt" : "fas fa-calendar-times"}
                     title={daily ? "Unmark as Daily" : "Mark as daily" }

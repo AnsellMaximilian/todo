@@ -5,7 +5,7 @@
     justify-content: center;
     margin: 10px auto;
     font-weight: bold;
-    min-width: 320px;
+    min-width: 300px;
     width: 80%;
     font-size: 15px;
     position: relative;
@@ -15,6 +15,37 @@
     cursor: pointer;
     margin: 0 5px;
     font-size: 15px;
+    border-radius: 5px;
+}
+
+#daily-form-btn, #important-form-btn {
+    border: none;
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    border: 5px black solid;
+    position: relative;
+}
+
+#daily-form-btn:hover::after, #important-form-btn:hover::after {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    font-weight: normal;
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 40px;
+    background-color: var(--highlight);
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+#daily-form-btn:hover::after {
+    content: "Mark Daily";
+}
+
+#important-form-btn:hover::after {
+    content: "Mark Important";
 }
     
 #title-input-container {
@@ -27,11 +58,6 @@
 #title-input-container > input {
     padding: 5px;
     width: 95%;
-}
-
-#title-input-container > span {
-    margin-right: 5px;
-    line-height: 25px;
 }
 
 #todo-submit {
@@ -52,7 +78,7 @@
 
 @media(max-width: 500px){
     #title-input-container {
-        width: 72.5%;
+        width: 65%;
     }
 
     #todo-form {
@@ -65,4 +91,10 @@
         margin: 0 !important;
         margin-top: 10px !important;
     }
+
+    #daily-form-btn:hover::after, #important-form-btn:hover::after {
+        content: "";
+        width: 0;
+    }
+    
 }

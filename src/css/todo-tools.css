@@ -1,0 +1,65 @@
+#todo-tools {
+    width: 100%;
+    border-right: 3px solid var(--main-color);
+    /* height: 100%;
+    overflow: scroll; */
+    transition-property: display, width, background-color;
+    transition-duration: 0.5s;
+}
+
+.todo-tool {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.todo-tool:hover {
+    background-color: var(--highlight);
+}
+
+#tools-toggle {
+    display: none;
+    margin: 0 auto !important;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    padding: 7.5px;
+    border-radius: 5px;
+    font-size: 17.5px;
+    outline: none;
+    box-shadow: 1px 1px 1px rgba(128, 128, 128, 0.267);
+}
+
+#tools-toggle:hover {
+    background-color: var(--highlight);
+}
+
+@media(max-width: 500px){
+    .todo-tool {
+        display: none;
+    }
+
+    #tools-toggle {
+        display: block;
+    }
+
+    .toggle-visible .todo-tool{
+        display: block !important;
+        clear: left;
+    }
+
+    .toggle-visible #tools-toggle {
+        float: left;
+        margin-left: 2.5px !important;
+        box-shadow: none;
+    }
+
+    .toggle-visible{
+        grid-area: unset;
+        width: 200px !important;
+        z-index: 5;
+        background-color: rgb(245, 245, 245) !important;
+        box-shadow: 2px 2px 3px rgba(128, 128, 128, 0.438);
+    }
+}

@@ -11,17 +11,15 @@ class TodoItem extends React.Component {
     }
 
     render(){
-        const {title, important, daily, completed} = this.props.details;
+        const {title, important, completed} = this.props.details;
         return(
             
-            <div className="todo-item">
+            <div className="todo-item" style={{fontWeight: important ? "bolder" : "normal"}}>
                 <button onClick={this.handleToggleComplete}
-                    className={completed ? "fas fa-check-square" : "fas fa-square"}
+                    className={completed ? "fas fa-check checkbox-checked" : "fas fa-check checkbox"}
                 ></button>
-                <span>{title}</span>
-                <button className={important ? "fas fa-exclamation-circle" : "fas fa-circle"}></button>
-                <span>{daily ? "Daily" : "Whatever"}</span>
-                <button onClick={this.handleDelete}>Delete</button>
+                <span className="todo-title">{title}</span>
+                <button onClick={this.handleDelete} className="delete-todo-btn fas fa-trash"></button>
             </div>
         )
     }

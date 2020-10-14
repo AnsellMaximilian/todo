@@ -1,0 +1,54 @@
+/* 
+#todo-list {
+    max-width: 100%;
+} */
+
+.delete-todo-btn:hover {
+    background-color: rgb(238, 1, 1);
+}
+
+[class*=checkbox] {
+    padding: 4.5px;
+    border: 3px solid black;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+[class*=checkbox]:hover {
+    background-color: var(--highlight);
+}
+
+.checkbox {
+    color: rgba(255, 255, 255, 0);
+}
+
+.todo-item {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.247);
+    margin-bottom: 7.5px;
+    padding: 5px 0;
+    width: 80%;
+    min-width: 280px;
+}
+
+.delete-todo-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 7.5px;
+    border-radius: 5px;
+    position: absolute;
+    right: 0;
+}
+
+
+[class*=checkbox], .delete-todo-btn, .todo-title{
+    display: block;
+    margin: 0 10px
+}
+

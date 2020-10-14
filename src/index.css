@@ -1,5 +1,6 @@
 :root {
   --main-color: rgb(0, 129, 235);
+  --highlight: rgba(0, 129, 235, 0.20);
 }
 
 body {
