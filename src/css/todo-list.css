@@ -46,9 +46,12 @@
     right: 0;
 }
 
-
 [class*=checkbox], .delete-todo-btn, .todo-title{
     display: block;
     margin: 0 10px
+}
+
+.todo-title{
+    text-align: left;
 }
 

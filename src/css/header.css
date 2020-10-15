@@ -46,8 +46,6 @@
     z-index: 14;
 }
 
-
-
 #auth-form {
     color: black;
     width: 600px;
@@ -60,6 +58,8 @@
     transform: translateX(-50%);
     z-index: 15;
     max-width: 90%;
+    animation-name: form-appear;
+    animation-duration: 0.35s;
 }
 
 #auth-form-title {
@@ -68,10 +68,26 @@
     padding: 10px;
 }
 
+#close-auth-form {
+    background-color: red;
+    color: white;
+    position: absolute;
+    right: 0;
+    padding: 7.5px;
+    margin: 7.5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#close-auth-form:hover {
+    background-color: rgb(228, 2, 2);
+}
+
 .auth-form-input {
     display: block;
     margin: 10px auto;
     height: 25px;
+    min-width: 200px;
 }
 
 #auth-form-button {
@@ -93,4 +109,12 @@
 
 #auth-form-button:active {
     transform: scale(0.85);
+}
+
+@keyframes form-appear {
+    0%{
+        transform: translate(-50%,300px);
+    }100%{
+        transform: translate(-50%, 0)
+    }
 }

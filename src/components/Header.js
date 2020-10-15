@@ -1,7 +1,7 @@
 import React from 'react';
 
 //AUTH
-// import {auth} from '../service/firebase';
+import {auth} from '../service/firebase';
 
 //CSS
 import '../css/header.css';
@@ -11,26 +11,112 @@ class Header extends React.Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            hideForm: true,
+            formMode: '',
+            userLoggedIn: false
         }
     }
+
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            if(user){
+                this.setState({ userLoggedIn: true})
+            }else{
+                this.setState({ userLoggedIn: false});
+            }
+        });
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = () => {
+        if(this.state.formMode === "Sign Up"){
+            this.signUp();
+        }else if(this.state.formMode === "Log In"){
+            this.signIn();
+        }
+        this.setState({
+            email: '',
+            password: '',
+            hideForm: true,
+            formMode: ''
+        })
+        
+    }
+
+    signUp = () => {
+        auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(userCred => {
+            console.log(userCred)
+        });
+    }
+
+    signIn = () => {
+        auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(user => console.log(user));
+    }
+
+    logOut = () => {
+        auth.signOut()
+        .then(() => console.log("Logged Out"));
+    }
+
+    openForm = (mode) => {
+        if(mode === "signUp"){
+            this.setState({
+                hideForm: false,
+                formMode: "Sign Up"
+            })
+        }else if(mode === "logIn"){
+            this.setState({
+                hideForm: false,
+                formMode: "Log In"
+            })
+        }else if(mode === "logOut"){
+            this.logOut();
+        }
+    }
+
+
     render(){
+        const authLinks = this.state.userLoggedIn ? 
+            <li key="logOut" className="navbar-button" onClick={() => this.openForm("logOut")}>Log Out</li> : 
+
+            [<li key="signUp" className="navbar-button" onClick={() => this.openForm("signUp")}>Sign Up</li>,
+            <li key="signIn" className="navbar-button" onClick={() => this.openForm("logIn")}>Log In</li>];
+
         return(
             <header id="app-header">
-                <h1 id="app-title">{this.props.title}</h1>
+                <h1 id="app-title"><i className="fas fa-list"></i> {this.props.title}</h1>
                 <nav id="navbar">
                     <ul id="navbar-list">
-                        <li className="navbar-button">Sign Up</li>
-                        <li className="navbar-button">Log In</li>
-                        <li className="navbar-button">Log Out</li>
+                        {authLinks}
                     </ul>
                 </nav>
-                <div id="auth-form-container">
+                <div id="auth-form-container" style={{display: this.state.hideForm ? "none" : "block"}}>
                     <div id="auth-form">
-                        <h1 id="auth-form-title">Sign Up</h1>
-                            <input placeholder="Email" type="email" name="email" className="auth-form-input"/>
-                            <input placeholder="Password" type="password" name="password" className="auth-form-input"/>
-                            <button id="auth-form-button">Sign Up</button>
+                        <i className="fas fa-times" id="close-auth-form" onClick={() => this.setState({hideForm: true, formMode: ''})}></i>
+                        <h1 id="auth-form-title">{this.state.formMode}</h1>
+                            <input 
+                                placeholder="Email" 
+                                value={this.state.email} 
+                                type="email" name="email" 
+                                className="auth-form-input"
+                                onChange={this.handleChange}
+                            />
+                            <input
+                                placeholder="Password" 
+                                value={this.state.password} 
+                                type="password" name="password" 
+                                className="auth-form-input"
+                                onChange={this.handleChange}
+                            />
+                            <button id="auth-form-button" onClick={this.handleSubmit}>{this.state.formMode}</button>
                     </div>
                 </div>
                
