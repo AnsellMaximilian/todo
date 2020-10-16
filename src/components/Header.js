@@ -89,9 +89,16 @@ class Header extends React.Component {
 
 
     render(){
+        const currentUser = auth.currentUser;
         const authLinks = this.props.userLoggedIn ? 
-            <li key="logOut" className="navbar-button" onClick={() => this.openForm("logOut")}>Log Out</li> : 
-
+            [<li key="user" className="navbar-button fas fa-user" id="navbar-user-info">
+                <div>
+                    <span>Signed in as:</span>
+                    <span>{currentUser.email}</span>
+                </div>
+            </li>,
+            <li key="logOut" className="navbar-button" onClick={() => this.openForm("logOut")}>Log Out</li>] 
+            : 
             [<li key="signUp" className="navbar-button" onClick={() => this.openForm("signUp")}>Sign Up</li>,
             <li key="signIn" className="navbar-button" onClick={() => this.openForm("logIn")}>Log In</li>];
 

@@ -21,6 +21,10 @@ class TodoForm extends React.Component {
     }
 
     handleSubmit = (e) => {
+        if(e.target.value === ''){
+            console.log("Please enter a value");
+            return;
+        };
         e.preventDefault();
         this.props.addTodo(this.state);
         this.setState({
