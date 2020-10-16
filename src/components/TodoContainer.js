@@ -16,7 +16,7 @@ class TodoContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            todoItems: []
+            todoItems: [],
         }
     }
 

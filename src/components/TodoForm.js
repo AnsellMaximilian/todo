@@ -21,7 +21,7 @@ class TodoForm extends React.Component {
     }
 
     handleSubmit = (e) => {
-        if(e.target.value === ''){
+        if(this.state.title === ''){
             console.log("Please enter a value");
             return;
         };
