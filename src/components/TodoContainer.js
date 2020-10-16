@@ -7,7 +7,7 @@ import TodoForm from './TodoForm';
 import TodoTools from './TodoTools';
 
 //Database
-import {db} from '../service/firebase';
+import {auth, db} from '../service/firebase';
 
 // CSS
 import '../css/todo-container.css';
@@ -26,9 +26,11 @@ class TodoContainer extends React.Component {
     }
 
     addTodo = (todo) => {
+        const currentUser = auth.currentUser;
         const todoItems = this.state.todoItems;
         //add todo to firebase
         db.collection('todos').add({
+            user: currentUser.uid,
             title: todo.title,
             important: todo.important,
             daily: todo.daily,
@@ -74,7 +76,8 @@ class TodoContainer extends React.Component {
 
     // Tools methods
     getAllTasks = () => {
-        db.collection('todos').orderBy('important', 'desc').get() 
+        const currentUser = auth.currentUser;
+        db.collection('todos').where('user', '==', currentUser.uid).orderBy('important', 'desc').get() 
         .then((result) => {
             const todoItems = result.docs.map((doc) => {
                 const {title, important, daily, completed} = doc.data();
@@ -102,7 +105,8 @@ class TodoContainer extends React.Component {
 
     // Set todos in state by value of attribute
     filterTasks = (att, value) => {
-        db.collection('todos').where(att, "==", value).get()
+        const currentUser = auth.currentUser;
+        db.collection('todos').where('user', '==', currentUser.uid).where(att, "==", value).get()
         .then(result => {
             const todoItems = result.docs.map((doc) => {
                 const {title, important, daily, completed} = doc.data();

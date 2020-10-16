@@ -14,18 +14,23 @@ class Header extends React.Component {
             password: '',
             hideForm: true,
             formMode: '',
-            userLoggedIn: false
         }
     }
 
     componentDidMount(){
         auth.onAuthStateChanged(user => {
             if(user){
-                this.setState({ userLoggedIn: true})
+                // this.setState({ userLoggedIn: true})
+                this.updateAuthStatus(true);
             }else{
-                this.setState({ userLoggedIn: false});
+                // this.setState({ userLoggedIn: false});
+                this.updateAuthStatus(false);
             }
         });
+    }
+
+    updateAuthStatus = (value) => {
+        this.props.updateAuthStatus(value);
     }
 
     handleChange = (e) => {
@@ -52,13 +57,13 @@ class Header extends React.Component {
     signUp = () => {
         auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(userCred => {
-            console.log(userCred)
+            console.log("Sign Up Successful");
         });
     }
 
     signIn = () => {
         auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(user => console.log(user));
+        .then(user => console.log("Log In Successful"));
     }
 
     logOut = () => {
@@ -84,7 +89,7 @@ class Header extends React.Component {
 
 
     render(){
-        const authLinks = this.state.userLoggedIn ? 
+        const authLinks = this.props.userLoggedIn ? 
             <li key="logOut" className="navbar-button" onClick={() => this.openForm("logOut")}>Log Out</li> : 
 
             [<li key="signUp" className="navbar-button" onClick={() => this.openForm("signUp")}>Sign Up</li>,
