@@ -10,8 +10,26 @@
 .todo-tool {
     border-bottom: 1px solid rgba(128, 128, 128, 0.25);
     cursor: pointer;
-    padding: 5px;
+    padding: 5px 5px 5px 10%;
     font-weight: bold;
+    text-align: left;
+    position: relative;
+}
+
+.extra-tool {
+    position: absolute;
+    display: block;
+    padding: 3px;
+    right: 5px;
+    border: 1px solid  rgba(128, 128, 128, 0.5);
+    background-color: white;;
+    border-radius: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.extra-tool:hover {
+    background-color:  rgb(230, 230, 230);;
 }
 
 .todo-tool:hover {
@@ -35,7 +53,7 @@
     background-color: var(--highlight);
 }
 
-@media(max-width: 500px){
+@media(max-width: 800px){
     .todo-tool {
         display: none;
     }

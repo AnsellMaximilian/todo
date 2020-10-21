@@ -19,7 +19,7 @@
     grid-area: list;
 }
 
-@media(max-width: 500px){
+@media(max-width: 800px){
     #todo-container {
         grid-template-columns: 35px 4fr;
     }

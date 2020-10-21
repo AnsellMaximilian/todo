@@ -103,6 +103,23 @@ class TodoContainer extends React.Component {
         this.filterTasks('completed', true);
     }
 
+    //Reset Daily Tasks
+    resetDailyTasks = () => {
+        const currentUser = auth.currentUser;
+        db.collection('todos').where('user', '==', currentUser.uid).where('daily', "==", true).get()
+        .then(result => {
+            let batch = db.batch();
+            result.forEach(doc => {
+                const todoRef = db.collection('todos').doc(doc.id);
+                batch.update(todoRef, {completed: false});
+            })
+            batch.commit().then(() => {
+                console.log("Update Completed");
+                this.getDailyTasks();
+            })
+        })
+    }
+
     // Set todos in state by value of attribute
     filterTasks = (att, value) => {
         const currentUser = auth.currentUser;
@@ -129,6 +146,7 @@ class TodoContainer extends React.Component {
                     getAllTasks={this.getAllTasks}
                     getImportantTasks={this.getImportantTasks}
                     getCompletedTasks={this.getCompletedTasks}
+                    resetDailyTasks={this.resetDailyTasks}
                 />
                 <TodoList todoItems={this.state.todoItems}
                     deleteTodo={this.deleteTodo}
