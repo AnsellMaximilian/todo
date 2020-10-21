@@ -17,6 +17,7 @@ class TodoContainer extends React.Component {
         super(props);
         this.state = {
             todoItems: [],
+            filterMode: 'all'
         }
     }
 
@@ -86,7 +87,8 @@ class TodoContainer extends React.Component {
                 return newTodo;
             });
             this.setState({
-                todoItems: todoItems
+                todoItems: todoItems,
+                filterMode: 'all'
             })
         })
     }
@@ -132,10 +134,12 @@ class TodoContainer extends React.Component {
                 return newTodo;
             });
             this.setState({
-                todoItems: todoItems
+                todoItems: todoItems,
+                filterMode: att
             })
         })
     }
+
     render(){
         
         return(
@@ -147,6 +151,7 @@ class TodoContainer extends React.Component {
                     getImportantTasks={this.getImportantTasks}
                     getCompletedTasks={this.getCompletedTasks}
                     resetDailyTasks={this.resetDailyTasks}
+                    filterMode={this.state.filterMode}
                 />
                 <TodoList todoItems={this.state.todoItems}
                     deleteTodo={this.deleteTodo}

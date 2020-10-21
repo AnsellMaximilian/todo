@@ -16,6 +16,10 @@
     position: relative;
 }
 
+.filter {
+    background-color: var(--highlight);
+}
+
 .extra-tool {
     position: absolute;
     display: block;
