@@ -5,6 +5,7 @@
     overflow: scroll; */
     transition-property: display, width, background-color;
     transition-duration: 0.5s;
+    box-sizing: border-box;
 }
 
 .todo-tool {

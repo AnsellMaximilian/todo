@@ -75,14 +75,19 @@ class TodoContainer extends React.Component {
         })
     }
 
+    updateNotes = (id, notes) => {
+        db.collection('todos').doc(id).update({notes: notes})
+        .then(function(){console.log("Updated")})
+    }
+
     // Tools methods
     getAllTasks = () => {
         const currentUser = auth.currentUser;
         db.collection('todos').where('user', '==', currentUser.uid).orderBy('important', 'desc').get() 
         .then((result) => {
             const todoItems = result.docs.map((doc) => {
-                const {title, important, daily, completed} = doc.data();
-                const newTodo = new Todo(doc.id, title, important, daily);
+                const {title, important, daily, completed, notes} = doc.data();
+                const newTodo = new Todo(doc.id, title, important, daily, notes);
                 newTodo.completed = completed;
                 return newTodo;
             });
@@ -128,8 +133,8 @@ class TodoContainer extends React.Component {
         db.collection('todos').where('user', '==', currentUser.uid).where(att, "==", value).get()
         .then(result => {
             const todoItems = result.docs.map((doc) => {
-                const {title, important, daily, completed} = doc.data();
-                const newTodo = new Todo(doc.id, title, important, daily);
+                const {title, important, daily, completed, notes} = doc.data();
+                const newTodo = new Todo(doc.id, title, important, daily, notes);
                 newTodo.completed = completed;
                 return newTodo;
             });
@@ -156,6 +161,7 @@ class TodoContainer extends React.Component {
                 <TodoList todoItems={this.state.todoItems}
                     deleteTodo={this.deleteTodo}
                     toggleCompleteTodo={this.toggleCompleteTodo}
+                    updateNotes={this.updateNotes}
                 />
             </div>
         )

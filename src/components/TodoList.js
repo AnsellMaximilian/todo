@@ -8,7 +8,12 @@ import '../css/todo-list.css';
 class TodoList extends React.Component {
     render(){
         const todoItemComponents = this.props.todoItems.map((todo, index) => {
-            return <TodoItem details={todo} key={index} deleteTodo={this.props.deleteTodo} toggleCompleteTodo={this.props.toggleCompleteTodo}/>
+            return <TodoItem 
+                details={todo} key={index} 
+                deleteTodo={this.props.deleteTodo} 
+                toggleCompleteTodo={this.props.toggleCompleteTodo}
+                updateNotes={this.props.updateNotes}    
+                />
         })
         return(
             <div id="todo-list">
