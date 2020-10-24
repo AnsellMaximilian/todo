@@ -77,7 +77,9 @@ class TodoContainer extends React.Component {
 
     updateNotes = (id, notes) => {
         db.collection('todos').doc(id).update({notes: notes})
-        .then(function(){console.log("Updated")})
+        .then(() => {
+            // this.filterTasks(this.state.filterMode, true)
+        })
     }
 
     // Tools methods
