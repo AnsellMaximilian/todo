@@ -27,3 +27,4 @@ This app was made using Firebase's auth and firestore so you can:
 - Delete todos, which will permanently remove it from your account. 
 - Your todos will be protected by Firebase rules so that evey todo item can only be access by its respective authorized user.
 - You also have to log in or sign up to store todos.
+- Each todo may have an associated notes which will be invisible by default and can be revealed by clicking a button in the todo item element.
