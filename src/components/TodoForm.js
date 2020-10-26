@@ -36,7 +36,7 @@ class TodoForm extends React.Component {
     render(){
         const {title, important, daily} = this.state;
         return(
-            <div id="todo-form">
+            <form id="todo-form">
                 <label htmlFor="title" id="title-input-container">
                     <input id="title" name="title" type="text" placeholder="Enter Todo Title" value={title} onChange={this.handleChange}/>
                 </label>
@@ -55,7 +55,7 @@ class TodoForm extends React.Component {
                 ></button>
 
                 <button type="submit" id="todo-submit" onClick={this.handleSubmit}>ADD</button>
-            </div>
+            </form>
         )
     }
 }
