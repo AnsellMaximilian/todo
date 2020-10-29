@@ -85,7 +85,7 @@ class TodoContainer extends React.Component {
     // Tools methods
     getAllTasks = () => {
         const currentUser = auth.currentUser;
-        db.collection('todos').where('user', '==', currentUser.uid).orderBy('important', 'desc').get() 
+        db.collection('todos').where('user', '==', currentUser.uid).orderBy('completed', 'asc').orderBy('important', 'desc').get() 
         .then((result) => {
             const todoItems = result.docs.map((doc) => {
                 const {title, important, daily, completed, notes} = doc.data();
@@ -101,16 +101,21 @@ class TodoContainer extends React.Component {
     }
 
     getDailyTasks = () => {
-        this.filterTasks('daily', true);
+        this.filterTasks('daily', true, 'daily');
     }
 
     getImportantTasks = () => {
-        this.filterTasks('important', true);
+        this.filterTasks('important', true, 'important');
     }
     
     getCompletedTasks = () => {
-        this.filterTasks('completed', true);
+        this.filterTasks('completed', true, 'completed');
     }
+
+    getUncompletedTasks = () => {
+        this.filterTasks('completed', false, 'uncompleted');
+    }
+
 
     //Reset Daily Tasks
     resetDailyTasks = () => {
@@ -130,7 +135,7 @@ class TodoContainer extends React.Component {
     }
 
     // Set todos in state by value of attribute
-    filterTasks = (att, value) => {
+    filterTasks = (att, value, filterMode) => {
         const currentUser = auth.currentUser;
         db.collection('todos').where('user', '==', currentUser.uid).where(att, "==", value).get()
         .then(result => {
@@ -142,7 +147,7 @@ class TodoContainer extends React.Component {
             });
             this.setState({
                 todoItems: todoItems,
-                filterMode: att
+                filterMode: filterMode
             })
         })
     }
@@ -157,6 +162,7 @@ class TodoContainer extends React.Component {
                     getAllTasks={this.getAllTasks}
                     getImportantTasks={this.getImportantTasks}
                     getCompletedTasks={this.getCompletedTasks}
+                    getUncompletedTasks={this.getUncompletedTasks}
                     resetDailyTasks={this.resetDailyTasks}
                     filterMode={this.state.filterMode}
                 />
